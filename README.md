@@ -13,6 +13,7 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 ## 2. Thành viên nhóm
 
 | STT | Họ và tên |
+|:---:|---|
 | 1 | Nguyễn Thị Trang |
 | 2 | Tô Thị Thu Hiền |
 | 3 | Hồ Mai Chi |
