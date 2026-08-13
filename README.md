@@ -9,18 +9,78 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 Đề tài được xây dựng với mục tiêu áp dụng kiến thức về lập trình web, cơ sở dữ liệu và mô hình MVC vào việc xây dựng một hệ thống quản lý thực tế.
 
 ---
+## 2. Thành viên và phân công
 
-## 2. Thành viên nhóm
+| STT | Thành viên   | Phân công                                                  |
+| --- | ------------ | ---------------------------------------------------------- |
+| 1   | Thành viên 1 | Quản lý Sinh viên, Tài khoản và Đăng nhập                  |
+| 2   | Thành viên 2 | Quản lý Giảng viên, Học phần và Lớp học phần               |
+| 3   | Thành viên 3 | Quản lý Đăng ký học phần, Kết quả học tập và Xếp loại điểm |
 
-| STT | Họ và tên |
-|:---:|---|
-| 1 | Nguyễn Thị Trang |
-| 2 | Tô Thị Thu Hiền |
-| 3 | Hồ Mai Chi |
+## 3. Các đối tượng dữ liệu chính
 
----
+* Sinh viên
+* Giảng viên
+* Tài khoản
+* Học phần
+* Lớp học phần
+* Đăng ký học phần
+* Kết quả học tập
 
-## 3. Công nghệ sử dụng
+## 4. Các chức năng dự kiến
+
+### Sinh viên
+
+* Đăng nhập/đăng xuất.
+* Xem danh sách học phần.
+* Xem thông tin lớp học phần.
+* Đăng ký học phần.
+* Hủy đăng ký học phần.
+* Xem lịch học.
+* Xem kết quả học tập.
+
+### Giảng viên
+
+* Đăng nhập.
+* Xem lớp học phần phụ trách.
+* Xem danh sách sinh viên.
+* Nhập và cập nhật điểm.
+
+### Quản trị viên
+
+* Quản lý sinh viên.
+* Quản lý giảng viên.
+* Quản lý học phần.
+* Quản lý lớp học phần.
+* Quản lý tài khoản.
+* Quản lý đăng ký học phần.
+* Quản lý kết quả học tập.
+
+ Chức năng đã thực hiện đến hết Buổi 2
+
+* Thống nhất tên và phạm vi đề tài.
+* Xác định các đối tượng dữ liệu chính.
+* Xác định các chức năng chính của hệ thống.
+* Phân công nhiệm vụ cho 3 thành viên.
+* Tích hợp chức năng xếp loại điểm từ bài cá nhân vào hệ thống.
+
+### Quy tắc xếp loại điểm
+
+| Điểm   | Xếp loại   |
+| ------ | ---------- |
+| >= 8   | Giỏi       |
+| >= 6.5 | Khá        |
+| >= 5   | Trung bình |
+| < 5    | Chưa đạt   |
+
+Ví dụ:
+
+```text
+Điểm: 8.5
+Xếp loại: Giỏi
+```
+
+## 5. Công nghệ sử dụng
 
 - **Ngôn ngữ:** PHP
 - **Cơ sở dữ liệu:** MySQL
@@ -34,40 +94,7 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 
 ---
 
-## 4. Chức năng của hệ thống
-
-### 4.1. Chức năng dành cho sinh viên
-
-- Đăng ký tài khoản.
-- Đăng nhập hệ thống.
-- Đăng xuất.
-- Xem danh sách khóa học.
-- Tìm kiếm khóa học.
-- Xem thông tin chi tiết khóa học.
-- Xem danh sách học phần.
-- Xem thông tin chi tiết học phần.
-- Đăng ký học phần.
-- Xem các học phần đã đăng ký.
-- Quản lý thông tin cá nhân.
-
-### 4.2. Chức năng dành cho quản trị viên
-
-- Đăng nhập trang quản trị.
-- Quản lý khóa học.
-- Thêm khóa học.
-- Sửa thông tin khóa học.
-- Xóa khóa học.
-- Quản lý học phần.
-- Thêm học phần.
-- Sửa thông tin học phần.
-- Xóa học phần.
-- Quản lý sinh viên.
-- Quản lý danh sách đăng ký học phần.
-- Xem và quản lý dữ liệu hệ thống.
-
----
-
-## 5. Cấu trúc thư mục
+## 6. Cấu trúc thư mục
 
 ```text
 quan-ly-khoa-hoc/
@@ -123,7 +150,7 @@ quan-ly-khoa-hoc/
 
 ---
 
-# 6. Yêu cầu môi trường
+# 7. Yêu cầu môi trường
 
 Để chạy project trên máy tính cá nhân, cần cài đặt:
 - WampServer
@@ -136,7 +163,7 @@ quan-ly-khoa-hoc/
 
 ---
 
-# 7. Hướng dẫn cài đặt và chạy project trên Local
+# 8. Hướng dẫn cài đặt và chạy project trên Local
 
 ## Bước 1: Cài đặt WampServer
 
@@ -183,7 +210,7 @@ C:\wamp64\www\qly-khoa-hoc\
 
 ---
 
-# 8. Tạo cơ sở dữ liệu
+# 9. Tạo cơ sở dữ liệu
 
 ## Bước 1
 Mở trình duyệt và truy cập:
@@ -216,7 +243,7 @@ database/database.sql
 ```
 Sau khi import thành công, Database sẽ chứa các bảng cần thiết cho hệ thống.
 ---
-# 9. Cấu hình kết nối Database
+# 10. Cấu hình kết nối Database
 
 Mở file cấu hình Database trong thư mục:
 
@@ -259,7 +286,7 @@ Password:
 Database: quan_ly_khoa_hoc
 ```
 
-# 10. Chạy website
+# 11. Chạy website
 
 Sau khi:
 
@@ -280,7 +307,7 @@ Nếu project có file `index.php` ở thư mục gốc, website sẽ được k
 
 ---
 
-# 11. Truy cập trang giới thiệu
+# 12. Truy cập trang giới thiệu
 
 Trang giới thiệu nhóm và đề tài được đặt tại:
 
@@ -300,7 +327,7 @@ Trang About bao gồm:
 - Chức năng chính.
 ---
 
-# 12. Mục tiêu của đề tài
+# 13. Mục tiêu của đề tài
 
 Hệ thống được xây dựng nhằm:
 
@@ -314,7 +341,7 @@ Hệ thống được xây dựng nhằm:
 
 ---
 
-# 13. Quy trình hoạt động cơ bản
+# 14. Quy trình hoạt động cơ bản
 
 ### Đối với sinh viên
 
@@ -350,7 +377,7 @@ Quản lý đăng ký học phần
 
 ---
 
-# 14. Ghi chú
+# 15. Ghi chú
 
 Project được xây dựng phục vụ mục đích học tập và thực hành lập trình web.
 
@@ -366,7 +393,7 @@ Khi chạy project trên máy khác, cần đảm bảo:
 
 ---
 
-# 15. Bản quyền
+# 16. Bản quyền
 
 © 2026 - Nhóm 6
 
