@@ -13,9 +13,9 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 
 | STT | Thành viên   | Phân công                                                  |
 | --- | ------------ | ---------------------------------------------------------- |
-| 1   | Thành viên 1 | Quản lý Sinh viên, Tài khoản và Đăng nhập                  |
-| 2   | Thành viên 2 | Quản lý Giảng viên, Học phần và Lớp học phần               |
-| 3   | Thành viên 3 | Quản lý Đăng ký học phần, Kết quả học tập và Xếp loại điểm |
+| 1   | Tô Thị Thu Hiền |Đăng nhập & phân quyền Admin; Quản lý tài khoản; học kỳ; học phần; lớp học phần; Thay đổi sĩ số; Mở/khóa lớp; Duyệt yêu cầu chỉnh sửa; Tìm kiếm/lọc; Phân trang                |
+| 2   | Nguyễn Thị Trang | Quản lý sinh viên; Đăng ký/hủy đăng ký; Lịch sử đăng ký; Kiểm tra điều kiện đăng ký; Xem kết quả học tập              |
+| 3   | Hồ Mai Chi | Quản lý sinh viên; Đăng ký/hủy đăng ký; Lịch sử đăng ký; Kiểm tra điều kiện đăng ký; Xem kết quả học tập |
 
 ## 3. Các đối tượng dữ liệu chính
 
@@ -62,7 +62,7 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 * Xác định các đối tượng dữ liệu chính.
 * Xác định các chức năng chính của hệ thống.
 * Phân công nhiệm vụ cho 3 thành viên.
-* Tích hợp chức năng xếp loại điểm từ bài cá nhân vào hệ thống.
+  xây dựng form quản lý học phần , Đăng ký học phần
 
 ### Quy tắc xếp loại điểm
 
