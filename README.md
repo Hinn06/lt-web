@@ -13,9 +13,9 @@ Hệ thống đồng thời hỗ trợ quản trị viên quản lý khóa học
 
 | STT | Thành viên   | Phân công                                                  |
 | --- | ------------ | ---------------------------------------------------------- |
-| 1   | Tô Thị Thu Hiền |Đăng nhập & phân quyền Admin; Quản lý tài khoản; học kỳ; học phần; lớp học phần; Thay đổi sĩ số; Mở/khóa lớp; Duyệt yêu cầu chỉnh sửa; Tìm kiếm/lọc; Phân trang                |
-| 2   | Nguyễn Thị Trang | Quản lý sinh viên; Đăng ký/hủy đăng ký; Lịch sử đăng ký; Kiểm tra điều kiện đăng ký; Xem kết quả học tập              |
-| 3   | Hồ Mai Chi |  Trang giảng viên; Xem lớp được phân công; Chi tiết lớp; Danh sách sinh viên; Nhập/cập nhật điểm 
+| 1   | Tô Thị Thu Hiền |Đăng nhập & phân quyền, quản lý tài khoản, quản lý học kỳ, quản lý học phần, quản lý lớp học phần, thay đổi sĩ số, mở/khóa lớp, duyệt yêu cầu chỉnh sửa, tìm kiếm/lọc, phân trang, Endpoint JSON.                |
+| 2   | Nguyễn Thị Trang | Quản lý thông tin cá nhân, đăng ký/hủy đăng ký học phần, lịch sử đăng ký, kiểm tra điều kiện đăng ký, xem kết quả học tập.              |
+| 3   | Hồ Mai Chi |  rang giảng viên, xem lớp được phân công, xem chi tiết lớp, xem danh sách sinh viên, nhập/cập nhật điểm, yêu cầu chỉnh sửa thông tin.
 
 ## 3. Các đối tượng dữ liệu chính
 
