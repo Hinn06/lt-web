@@ -79,6 +79,109 @@ Ví dụ:
 Điểm: 8.5
 Xếp loại: Giỏi
 ```
+## Quy tắc Validation
+
+### 1.1. Đăng nhập
+
+| Trường dữ liệu | Quy tắc |
+|---|---|
+| Username | Không được để trống |
+| Mật khẩu | Không được để trống |
+
+### 1.2. Tài khoản
+
+| Trường dữ liệu | Quy tắc |
+|---|---|
+| Username | Bắt buộc, không được trùng |
+| Mật khẩu | Bắt buộc khi tạo tài khoản |
+| Họ tên | Không được để trống |
+| Vai trò | Phải chọn Admin, Giảng viên hoặc Sinh viên |
+
+### 1.3. Học kỳ
+
+| Trường dữ liệu | Quy tắc |
+|---|---|
+| Tên học kỳ | Không được để trống |
+| Ngày bắt đầu | Bắt buộc, đúng định dạng ngày |
+| Ngày kết thúc | Bắt buộc, đúng định dạng ngày |
+| Thời gian | Ngày bắt đầu không được lớn hơn ngày kết thúc |
+
+### 1.4. Học phần
+
+| Trường dữ liệu | Quy tắc |
+|---|---|
+| Mã học phần | Bắt buộc, không được trùng |
+| Tên học phần | Không được để trống |
+| Số tín chỉ | Phải là số nguyên dương |
+| Mô tả | Có thể để trống |
+
+### 1.5. Lớp học phần
+
+| Trường dữ liệu | Quy tắc |
+|---|---|
+| Mã lớp | Bắt buộc, không được trùng |
+| Học phần | Phải chọn học phần tồn tại |
+| Học kỳ | Phải chọn học kỳ tồn tại |
+| Giảng viên | Phải chọn giảng viên tồn tại |
+| Sĩ số tối đa | Phải là số nguyên dương |
+
+### 1.6. Điểm
+
+- Điểm phải là số.
+- Điểm phải nằm trong khoảng từ `0` đến `10`.
+- Không chấp nhận điểm nhỏ hơn `0` hoặc lớn hơn `10`.
+
+Công thức tính điểm tổng kết:
+
+`Điểm tổng kết = Điểm giữa kỳ × 40% + Điểm cuối kỳ × 60%`
+## Quy tắc nghiệp vụ
+
+### 2.1. Phân quyền người dùng
+
+- **Admin:** Quản lý tài khoản, học kỳ, học phần, lớp học phần và dữ liệu đăng ký.
+- **Giảng viên:** Xem các lớp được phân công, xem danh sách sinh viên và nhập/cập nhật điểm.
+- **Sinh viên:** Xem, đăng ký, hủy đăng ký học phần và xem lịch sử đăng ký.
+
+Người dùng không được truy cập các chức năng nằm ngoài quyền hạn của mình.
+
+### 2.2. Quy tắc học phần
+
+- Mỗi học phần phải có mã học phần duy nhất.
+- Một học phần có thể có nhiều lớp học phần.
+- Không được tạo học phần có mã đã tồn tại.
+- Không nên xóa học phần nếu đang có dữ liệu liên quan.
+
+### 2.3. Quy tắc lớp học phần
+
+Mỗi lớp học phần phải thuộc:
+- Một học phần.
+- Một học kỳ.
+- Một giảng viên.
+
+Số lượng sinh viên đăng ký không được vượt quá sĩ số tối đa của lớp.
+
+### 2.4. Quy tắc đăng ký học phần
+
+Sinh viên chỉ được đăng ký khi:
+1. Đã đăng nhập.
+2. Lớp học phần tồn tại.
+3. Lớp đang cho phép đăng ký.
+4. Lớp chưa đủ sĩ số.
+5. Sinh viên chưa đăng ký lớp đó.
+
+Một sinh viên không được đăng ký trùng cùng một lớp học phần.
+
+### 2.5. Quy tắc hủy đăng ký
+
+- Sinh viên chỉ được hủy những lớp học phần mà mình đã đăng ký.
+- Sau khi hủy thành công, số lượng sinh viên đăng ký của lớp giảm đi 1.
+
+### 2.6. Quy tắc nhập điểm
+
+- Chỉ giảng viên được phân công mới được nhập điểm cho lớp.
+- Điểm phải nằm trong khoảng từ 0 đến 10.
+- Giảng viên được phép cập nhật điểm.
+- Hệ thống tự động tính điểm tổng kết.
 
 ## 5. Công nghệ sử dụng
 
