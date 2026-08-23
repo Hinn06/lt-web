@@ -263,8 +263,8 @@ Quan hệ:
 courses 1 ───── N classes
 semesters 1 ─── N classes
 users 1 ─────── N classes
-
-### Bảng `registrations`
+```
+### 5. Bảng `registrations`
 
 Bảng `registrations` dùng để lưu thông tin sinh viên đăng ký các lớp học phần.
 
@@ -278,10 +278,11 @@ Bảng `registrations` dùng để lưu thông tin sinh viên đăng ký các l�
 Bảng `registrations` là bảng liên kết giữa **Sinh viên (`users`)** và **Lớp học phần (`classes`)**.
 
 Quan hệ:
+
 ```text
 users 1 ───── N registrations
 classes 1 ─── N registrations
-
+```
 ### Bảng `grades`
 
 Bảng `grades` dùng để lưu thông tin điểm của sinh viên sau khi đăng ký học phần.
@@ -301,6 +302,7 @@ Quan hệ:
 
 ```text
 registrations 1 ───── 1 grades
+```
 ### Bảng `edit_requests`
 
 Bảng `edit_requests` dùng để lưu các yêu cầu chỉnh sửa điểm hoặc thông tin liên quan đến lớp học phần.
@@ -321,81 +323,10 @@ Bảng `edit_requests` có 3 khóa ngoại:
 teacher_id      → users.id
 class_id        → classes.id
 registration_id → registrations.id
-Các khóa ngoại giúp đảm bảo mỗi yêu cầu chỉnh sửa luôn gắn với giảng viên, lớp học phần và lượt đăng ký tồn tại trong hệ thống.
-
-Trạng thái của yêu cầu được quản lý bằng 3 giá trị:
-
-pending: Yêu cầu đang chờ xử lý.
-approved: Yêu cầu đã được chấp thuận.
-rejected: Yêu cầu đã bị từ chối.
-
-Quy trình xử lý:
-
-Giảng viên tạo yêu cầu
-        ↓
-     pending
-      ↙    ↘
-approved   rejected
-# 7. Yêu cầu môi trường
-
-Để chạy project trên máy tính cá nhân, cần cài đặt:
-- WampServer
-- PHP
-- MySQL
-- Apache
-- Trình duyệt web như Chrome, Microsoft Edge hoặc Firefox
-- Visual Studio Code 
-- Git 
-
----
-
-# 8. Hướng dẫn cài đặt và chạy project trên Local
-
-## Bước 1: Cài đặt WampServer
-
-Tải và cài đặt WampServer từ trang web:
-
-https://www.wampserver.com/
-
-Sau khi cài đặt, khởi động **WampServer**.
-
-Kiểm tra biểu tượng WampServer trên thanh taskbar.
-
-Nếu biểu tượng chuyển sang **màu xanh**, Apache và MySQL đã hoạt động bình thường.
-
----
-
-## Bước 2: Đưa project vào WampServer
-
-Copy hoặc clone project vào thư mục:
-
-```text
-C:\wamp64\www\
 ```
-
-Ví dụ:
-
-```text
-C:\wamp64\www\qly-khoa-hoc\
 ```
-
-Sau khi đặt project, cấu trúc thư mục có dạng:
-
-```text
-C:\wamp64\www\qly-khoa-hoc\
-│
-├── app\
-├── config\
-├── public\
-├── database\
-├── index.php
-├── about.php
-├── .gitignore
-└── README.md
 ```
-
 ---
-
 # 9. Tạo cơ sở dữ liệu
 
 ## Bước 1
