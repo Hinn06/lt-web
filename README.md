@@ -198,125 +198,142 @@ Một sinh viên không được đăng ký trùng cùng một lớp học phầ
 ---
 
 ## 6. Mô tả cơ sở dữ liệu
-Cơ sở dữ liệu gồm 7 bảng chính:
+Cơ sở dữ liệu gồm **7 bảng chính**: `users`, `courses`, `semesters`, `classes`, `registrations`, `grades` và `edit_requests`.
 
-1. Bảng users
+###  Bảng `users`
 
-Lưu thông tin tài khoản người dùng trong hệ thống, bao gồm Admin, Giảng viên và Sinh viên.
+Lưu thông tin tài khoản của các đối tượng sử dụng hệ thống gồm **Admin, Giảng viên và Sinh viên**.
 
-Trường	Mô tả
-id	Khóa chính
-username	Tên đăng nhập, không được trùng
-password	Mật khẩu đã mã hóa
-full_name	Họ và tên
-role	Vai trò: student, teacher, admin
-status	Trạng thái tài khoản
-created_at	Thời gian tạo tài khoản
-2. Bảng courses
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính |
+| `username` | Tên đăng nhập, không được trùng |
+| `password` | Mật khẩu đã mã hóa |
+| `full_name` | Họ và tên |
+| `role` | Vai trò: `student`, `teacher`, `admin` |
+| `status` | Trạng thái tài khoản |
+| `created_at` | Thời gian tạo tài khoản |
+
+### Bảng `courses`
 
 Lưu thông tin các học phần được quản lý trong hệ thống.
 
-Trường	Mô tả
-id	Khóa chính
-code	Mã học phần, không được trùng
-name	Tên học phần
-credits	Số tín chỉ
-description	Mô tả học phần
-status	Trạng thái học phần
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính |
+| `code` | Mã học phần, không được trùng |
+| `name` | Tên học phần |
+| `credits` | Số tín chỉ |
+| `description` | Mô tả học phần |
+| `status` | Trạng thái học phần |
 
 Một học phần có thể được mở thành nhiều lớp học phần.
 
-3. Bảng semesters
+### Bảng `semesters`
 
 Lưu thông tin các học kỳ.
 
-Trường	Mô tả
-id	Khóa chính
-name	Tên học kỳ
-start_date	Ngày bắt đầu
-end_date	Ngày kết thúc
-status	Trạng thái học kỳ
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính |
+| `name` | Tên học kỳ |
+| `start_date` | Ngày bắt đầu |
+| `end_date` | Ngày kết thúc |
+| `status` | Trạng thái học kỳ |
 
 Một học kỳ có thể có nhiều lớp học phần.
 
-4. Bảng classes
+### Bảng `classes`
 
 Lưu thông tin các lớp học phần được mở từ một học phần trong một học kỳ cụ thể.
 
-Trường	Mô tả
-id	Khóa chính
-class_code	Mã lớp học phần, không được trùng
-course_id	Khóa ngoại đến courses
-semester_id	Khóa ngoại đến semesters
-teacher_id	Khóa ngoại đến users
-max_students	Sĩ số tối đa
-status	Trạng thái lớp
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính |
+| `class_code` | Mã lớp học phần, không được trùng |
+| `course_id` | Khóa ngoại đến `courses` |
+| `semester_id` | Khóa ngoại đến `semesters` |
+| `teacher_id` | Khóa ngoại đến `users` |
+| `max_students` | Sĩ số tối đa |
+| `status` | Trạng thái lớp |
 
 Quan hệ:
 
+```text
 courses 1 ───── N classes
 semesters 1 ─── N classes
 users 1 ─────── N classes
+### Bảng `registrations`
 
-Trong đó teacher_id xác định giảng viên phụ trách lớp.
+Bảng `registrations` dùng để lưu thông tin sinh viên đăng ký các lớp học phần.
 
-5. Bảng registrations
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính của bảng |
+| `student_id` | Khóa ngoại tham chiếu đến `users.id`, xác định sinh viên đăng ký |
+| `class_id` | Khóa ngoại tham chiếu đến `classes.id`, xác định lớp học phần được đăng ký |
+| `registered_at` | Thời gian sinh viên thực hiện đăng ký |
 
-Lưu thông tin sinh viên đăng ký lớp học phần.
-
-Trường	Mô tả
-id	Khóa chính
-student_id	Khóa ngoại đến users
-class_id	Khóa ngoại đến classes
-registered_at	Thời gian đăng ký
-
-Bảng này là bảng liên kết giữa Sinh viên và Lớp học phần.
-
-Để tránh sinh viên đăng ký trùng một lớp, hệ thống sử dụng:
-
-UNIQUE (student_id, class_id)
+Bảng `registrations` là bảng liên kết giữa **Sinh viên (`users`)** và **Lớp học phần (`classes`)**.
 
 Quan hệ:
-
+text
 users 1 ───── N registrations
 classes 1 ─── N registrations
-6. Bảng grades
+### Bảng `grades`
 
-Lưu điểm của sinh viên sau khi đăng ký học phần.
+Bảng `grades` dùng để lưu thông tin điểm của sinh viên sau khi đăng ký học phần.
 
-Trường	Mô tả
-id	Khóa chính
-registration_id	Khóa ngoại đến registrations
-midterm	Điểm giữa kỳ
-final_exam	Điểm cuối kỳ
-total	Điểm tổng kết
-updated_at	Thời gian cập nhật
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính của bảng |
+| `registration_id` | Khóa ngoại tham chiếu đến `registrations.id` |
+| `midterm` | Điểm giữa kỳ |
+| `final_exam` | Điểm cuối kỳ |
+| `total` | Điểm tổng kết |
+| `updated_at` | Thời gian cập nhật điểm |
 
-Mỗi đăng ký học phần chỉ có tối đa một bảng điểm nên registration_id được đặt UNIQUE.
+Bảng `grades` liên kết với bảng `registrations` để xác định điểm thuộc về sinh viên và lớp học phần nào.
 
 Quan hệ:
 
+```text
 registrations 1 ───── 1 grades
-7. Bảng edit_requests
+### Bảng `edit_requests`
 
-Lưu các yêu cầu chỉnh sửa điểm hoặc thông tin liên quan đến lớp học phần.
+Bảng `edit_requests` dùng để lưu các yêu cầu chỉnh sửa điểm hoặc thông tin liên quan đến lớp học phần.
 
-Trường	Mô tả
-id	Khóa chính
-teacher_id	Giảng viên gửi yêu cầu
-class_id	Lớp học phần liên quan
-registration_id	Sinh viên/đăng ký liên quan
-content	Nội dung yêu cầu
-status	pending, approved, rejected
-created_at	Thời gian tạo yêu cầu
+| Trường | Mô tả |
+|---|---|
+| `id` | Khóa chính của bảng |
+| `teacher_id` | Khóa ngoại tham chiếu đến `users.id`, xác định giảng viên gửi yêu cầu |
+| `class_id` | Khóa ngoại tham chiếu đến `classes.id`, xác định lớp học phần liên quan |
+| `registration_id` | Khóa ngoại tham chiếu đến `registrations.id`, xác định lượt đăng ký liên quan |
+| `content` | Nội dung yêu cầu chỉnh sửa |
+| `status` | Trạng thái yêu cầu: `pending`, `approved`, `rejected` |
+| `created_at` | Thời gian tạo yêu cầu |
 
-Bảng này có các khóa ngoại:
+Bảng `edit_requests` có 3 khóa ngoại:
 
+```text
 teacher_id      → users.id
 class_id        → classes.id
 registration_id → registrations.id
-Quan hệ tổng quát của cơ sở dữ liệu
+Các khóa ngoại giúp đảm bảo mỗi yêu cầu chỉnh sửa luôn gắn với giảng viên, lớp học phần và lượt đăng ký tồn tại trong hệ thống.
 
+Trạng thái của yêu cầu được quản lý bằng 3 giá trị:
+
+pending: Yêu cầu đang chờ xử lý.
+approved: Yêu cầu đã được chấp thuận.
+rejected: Yêu cầu đã bị từ chối.
+
+Quy trình xử lý:
+
+Giảng viên tạo yêu cầu
+        ↓
+     pending
+      ↙    ↘
+approved   rejected
 # 7. Yêu cầu môi trường
 
 Để chạy project trên máy tính cá nhân, cần cài đặt:
