@@ -263,6 +263,7 @@ Quan hệ:
 courses 1 ───── N classes
 semesters 1 ─── N classes
 users 1 ─────── N classes
+
 ### Bảng `registrations`
 
 Bảng `registrations` dùng để lưu thông tin sinh viên đăng ký các lớp học phần.
@@ -277,9 +278,10 @@ Bảng `registrations` dùng để lưu thông tin sinh viên đăng ký các l�
 Bảng `registrations` là bảng liên kết giữa **Sinh viên (`users`)** và **Lớp học phần (`classes`)**.
 
 Quan hệ:
-text
+```text
 users 1 ───── N registrations
 classes 1 ─── N registrations
+
 ### Bảng `grades`
 
 Bảng `grades` dùng để lưu thông tin điểm của sinh viên sau khi đăng ký học phần.
