@@ -197,61 +197,125 @@ Một sinh viên không được đăng ký trùng cùng một lớp học phầ
 
 ---
 
-## 6. Cấu trúc thư mục
+## 6. Mô tả cơ sở dữ liệu
+Cơ sở dữ liệu gồm 7 bảng chính:
 
-```text
-quan-ly-khoa-hoc/
-│
-├── app/
-│   ├── controllers/
-│   │   └── .gitkeep
-│   │
-│   ├── models/
-│   │   └── .gitkeep
-│   │
-│   └── views/
-│       └── .gitkeep
-│
-├── config/
-│   └── .gitkeep
-│
-├── public/
-│   ├── css/
-│   │   └── .gitkeep
-│   │
-│   ├── js/
-│   │   └── .gitkeep
-│   │
-│   └── images/
-│       └── .gitkeep
-│
-├── database/
-│   └── database.sql
-│
-├── index.php
-├── about.php
-├── .gitignore
-└── README.md
-```
+1. Bảng users
 
-### Ý nghĩa các thư mục
+Lưu thông tin tài khoản người dùng trong hệ thống, bao gồm Admin, Giảng viên và Sinh viên.
 
-| Thư mục / File | Mô tả |
-|---|---|
-| `app/controllers/` | Chứa các Controller xử lý yêu cầu từ người dùng |
-| `app/models/` | Chứa các Model xử lý dữ liệu và tương tác với Database |
-| `app/views/` | Chứa giao diện hiển thị cho người dùng |
-| `config/` | Chứa các file cấu hình hệ thống và kết nối Database |
-| `public/css/` | Chứa các file CSS |
-| `public/js/` | Chứa các file JavaScript |
-| `public/images/` | Chứa hình ảnh sử dụng trong website |
-| `database/` | Chứa file SQL của cơ sở dữ liệu |
-| `index.php` | File khởi chạy chính của website |
-| `about.php` | Trang giới thiệu đề tài và thành viên nhóm |
-| `.gitignore` | Các file/thư mục không đưa lên GitHub |
-| `README.md` | Tài liệu giới thiệu và hướng dẫn sử dụng project |
+Trường	Mô tả
+id	Khóa chính
+username	Tên đăng nhập, không được trùng
+password	Mật khẩu đã mã hóa
+full_name	Họ và tên
+role	Vai trò: student, teacher, admin
+status	Trạng thái tài khoản
+created_at	Thời gian tạo tài khoản
+2. Bảng courses
 
----
+Lưu thông tin các học phần được quản lý trong hệ thống.
+
+Trường	Mô tả
+id	Khóa chính
+code	Mã học phần, không được trùng
+name	Tên học phần
+credits	Số tín chỉ
+description	Mô tả học phần
+status	Trạng thái học phần
+
+Một học phần có thể được mở thành nhiều lớp học phần.
+
+3. Bảng semesters
+
+Lưu thông tin các học kỳ.
+
+Trường	Mô tả
+id	Khóa chính
+name	Tên học kỳ
+start_date	Ngày bắt đầu
+end_date	Ngày kết thúc
+status	Trạng thái học kỳ
+
+Một học kỳ có thể có nhiều lớp học phần.
+
+4. Bảng classes
+
+Lưu thông tin các lớp học phần được mở từ một học phần trong một học kỳ cụ thể.
+
+Trường	Mô tả
+id	Khóa chính
+class_code	Mã lớp học phần, không được trùng
+course_id	Khóa ngoại đến courses
+semester_id	Khóa ngoại đến semesters
+teacher_id	Khóa ngoại đến users
+max_students	Sĩ số tối đa
+status	Trạng thái lớp
+
+Quan hệ:
+
+courses 1 ───── N classes
+semesters 1 ─── N classes
+users 1 ─────── N classes
+
+Trong đó teacher_id xác định giảng viên phụ trách lớp.
+
+5. Bảng registrations
+
+Lưu thông tin sinh viên đăng ký lớp học phần.
+
+Trường	Mô tả
+id	Khóa chính
+student_id	Khóa ngoại đến users
+class_id	Khóa ngoại đến classes
+registered_at	Thời gian đăng ký
+
+Bảng này là bảng liên kết giữa Sinh viên và Lớp học phần.
+
+Để tránh sinh viên đăng ký trùng một lớp, hệ thống sử dụng:
+
+UNIQUE (student_id, class_id)
+
+Quan hệ:
+
+users 1 ───── N registrations
+classes 1 ─── N registrations
+6. Bảng grades
+
+Lưu điểm của sinh viên sau khi đăng ký học phần.
+
+Trường	Mô tả
+id	Khóa chính
+registration_id	Khóa ngoại đến registrations
+midterm	Điểm giữa kỳ
+final_exam	Điểm cuối kỳ
+total	Điểm tổng kết
+updated_at	Thời gian cập nhật
+
+Mỗi đăng ký học phần chỉ có tối đa một bảng điểm nên registration_id được đặt UNIQUE.
+
+Quan hệ:
+
+registrations 1 ───── 1 grades
+7. Bảng edit_requests
+
+Lưu các yêu cầu chỉnh sửa điểm hoặc thông tin liên quan đến lớp học phần.
+
+Trường	Mô tả
+id	Khóa chính
+teacher_id	Giảng viên gửi yêu cầu
+class_id	Lớp học phần liên quan
+registration_id	Sinh viên/đăng ký liên quan
+content	Nội dung yêu cầu
+status	pending, approved, rejected
+created_at	Thời gian tạo yêu cầu
+
+Bảng này có các khóa ngoại:
+
+teacher_id      → users.id
+class_id        → classes.id
+registration_id → registrations.id
+Quan hệ tổng quát của cơ sở dữ liệu
 
 # 7. Yêu cầu môi trường
 
