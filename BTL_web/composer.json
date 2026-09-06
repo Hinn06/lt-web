@@ -1,6 +1,0 @@
-{
-  "name": "btlon/quan-ly-hoc-phan",
-  "description": "He thong quan ly khoa hoc va dang ky hoc phan - MVC PHP PDO",
-  "autoload": {"psr-4": {"App\\": "src/"}},
-  "require": {"php": ">=8.1"}
-}
